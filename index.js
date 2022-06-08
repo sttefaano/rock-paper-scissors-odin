@@ -71,7 +71,6 @@ const game = function(){
   for(let i = 0; i<5; i++){
     res = playRound(playerPlay(),computerPlay());
     //chequeamos si hay empate para que la ronda se vuelva a jugar
-    //si no hay empate, se verifica el ganador y se le suman los puntos
     if (res == 'tie'){
       if(i != 0){
         i--
@@ -81,6 +80,7 @@ const game = function(){
       }
       console.log("it's a tie! go again")
     }
+    //si no hay empate, se verifica el ganador y se le suman los puntos
     else{
       console.log(res + ' wins');
       if (res == 'computer'){
@@ -92,8 +92,6 @@ const game = function(){
     }
   }
 
-  //una vez terminada las 5 rondas sin empates verificamos quien tiene mas puntos
-  //asi se muestra en pantalla el ganador
   if (playerPoints > compPoints){
     console.log(`Player wins! with: ${playerPoints}`);
   }
