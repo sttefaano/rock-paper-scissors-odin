@@ -1,103 +1,84 @@
-// funcion que representa la jugada de la computadora
-  //random return de las 3 posibles strings
-// funcion que representa la jugada del usuario
-  //pedirle al usuario que ingrese una jugada
-  //pasar el string a lowercase para hacerlo case insensitive
-  //return string.tolower ingresado
-//funcion que compare las dos jugadas (computadora y usuario)
-  //comparar las jugadas
-  //devolver un ganador
-//funcion que inicialice el juego (se tiene que jugar 5 veces y decidir un ganador)
-  //loop para jugar 5 veces
-  //variables para decidir el ganador
+// global variables
+let optionBtn;
+let computerOptions = [0, 1, 2];
+let playerScore = 0;
+let computerScore = 0;
+let result;
+let resultEl;
+let resetBtn;
+let playerScoreEl;
+let computerScoreEl;
 
-//funcion que genera la jugada de la computadora
-const computerPlay = function (){
-  //creamos un numero random para poder elegir un resultado
-  let randNum = Math.floor(Math.random() * 100);
-  //elegimos un resultado dependiendo el resultado random
-  if(randNum < 33){
-    return 'rock';
-  }
-  else if(randNum >= 33 && randNum < 66){
-    return 'paper'
-  }
-  else{
-    return 'scissors'
+//Sets functions for DOM elements
+function setElements(){
+  optionBtn = document.querySelectorAll('.playerPick button');
+  resultEl = document.querySelector('.result');
+  playerScoreEl = document.querySelector('.playerScore');
+  computerScoreEl = document.querySelector('.computerScore');
+  resetBtn = document.createElement('button');
+
+  console.log(resultEl);
+
+  optionBtn.forEach(button => button.addEventListener('click', getPlayerPick));
+  // resetBtn.addEventListener('click', setDefault()); 
+}
+
+//Generates computer's play
+function computerPlay (){
+  return computerOptions[
+    Math.floor(Math.random() * computerOptions.length)];
+}
+
+function playRound(playerSelection, computerSelection){
+  let playComb = `${playerSelection}-${computerSelection}`;
+  let playerWinComb = ['0-2', '1-0', '2-1'];
+  let tieComb = ['0-0', '1-1', '2-2'];
+
+  if(playerWinComb.includes(playComb)){
+    updateRes(1);
+    updatePoints(1);
+  } else if(tieComb.includes(playComb)){
+    updateRes(0);
+  } else {
+    updateRes(-1);
+    updatePoints(-1);
   }
 }
 
-//funcion que pide al usuario su jugada
-const playerPlay = function(){
-  let playerSelec = prompt('Select: rock/paper/scissors');
-  //retornamos la eleccion del jugador en minuscula
-  return playerSelec.toLowerCase();
-}
-
-//funcion que inicializa la ronda con las elecciones de cada competidors
-const playRound = function(playerSelection, computerSelection){
-  //comparamos las elecciones de ambos y retornamos un ganador de la ronda
-  if (playerSelection == 'rock' && computerSelection == 'paper'){
-    return 'computer';
-  }
-  else if (playerSelection == 'rock' && computerSelection == 'scissors'){
-    return 'player';
-  }
-  else if (playerSelection == 'paper' && computerSelection == 'rock') {
-    return 'player';
-  }
-  else if (playerSelection == 'paper' && computerSelection == 'scissors'){
-    return 'computer';
-  }
-  else if (playerSelection == 'scissors' && computerSelection == 'rock'){
-    return 'computer';
-  }
-  else if (playerSelection == 'scissors' && computerSelection == 'paper'){
-    return 'player';
-  }
-  else{
-    return 'tie';
+function updateRes(res){
+  switch(res){
+    case 1:
+      resultEl.textContent = 'Player wins the round!';
+      break;
+    case 0: 
+      resultEl.textContent = 'Tie!';
+      break;
+    case -1:
+      resultEl.textContent = 'Computer wins the round!';
+      break;
   }
 }
 
-//funcion que inicializa el juego
-const game = function(){
-  //declaramos la variables a utilizar
-  let res = null;
-  let compPoints = 0;
-  let playerPoints = 0;
-
-  //ciclado para que se jueguen las 5 rondas que dura la partida
-  for(let i = 0; i<5; i++){
-    res = playRound(playerPlay(),computerPlay());
-    //chequeamos si hay empate para que la ronda se vuelva a jugar
-    if (res == 'tie'){
-      if(i != 0){
-        i--
-      }
-      else{
-        i = 0;
-      }
-      console.log("it's a tie! go again")
-    }
-    //si no hay empate, se verifica el ganador y se le suman los puntos
-    else{
-      console.log(res + ' wins');
-      if (res == 'computer'){
-        compPoints++;
-      }
-      else{
-        playerPoints++;
-      }
-    }
-  }
-
-  if (playerPoints > compPoints){
-    console.log(`Player wins! with: ${playerPoints}`);
-  }
-  else{
-    console.log(`Computer wins! with: ${compPoints}`)
+function updatePoints(res){
+  if(res == 1){
+    playerScore += 1;
+    playerScoreEl.textContent = 'player: ' + playerScore;
+  } else {
+    computerScore += 1;
+    computerScoreEl.textContent = 'computer : ' + computerScore;
   }
 }
 
-game();
+function checkWinner(){
+  if (playerScore >= 5 || computerScore >= 5){
+    return true;
+  } else{
+    return false;
+  }
+}
+
+function getPlayerPick(e){
+  playRound(e.target.className, computerPlay());
+}
+
+setElements();
