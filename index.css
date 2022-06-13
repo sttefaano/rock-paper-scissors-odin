@@ -5,41 +5,101 @@ html{
 
 *, *::before, *::after{
   box-sizing: inherit;
-}
-
-.body{
-  height: 100vh;
-  width: 100vh;
   padding: 0;
   margin: 0;
 }
 
-.flex{
+body{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  line-height: 1.6;
+  background-color: #222831;
+  color: rgb(201, 200, 200);
+}
+
+/* HEADER */
+.header{
+  display: flex;
   justify-content: center;
-  padding-top: 20px;
-  gap: 20px;
+  padding: 40px 0px;
+  background-color: #111720;
+}
+
+/* MAIN */
+main{
+  text-align: center;
+  margin-top: 30px;
 }
 
 .points{
   display: flex;
-  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
-.points div{
-  background-color: yellow;
-  border: 1px solid black;
-  width: 125px;
-  padding: 15px;
-  text-align: center;
+.scoreBox .score{
+  font-size: 25px;
+}
+
+.scoreBox .sign{
+  font-size: 100px;
+}
+
+.result{
+  font-size: 32px;
+}
+
+.resultInfo{
+  font-size: 20px;
+}
+
+.playerPick{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 20px;
 }
 
 .playerPick button{
-  background-color: rgb(116, 116, 255);
+  border: none;
+  width: 160px;
+  height: 160px;
+  border-radius: 10px;
+  background-color: #393e46;
+  cursor: pointer;
+  font-size: 80px;
+}
+
+.playerPick button:hover{
+    background-color:#5a626e;
+    transition: 0.5s;
+}
+
+.reset {
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #111720;
   color: white;
-  border : none;
-  border-radius: 15px;
-  padding: 10px;
+  font-size: 16px;
+}
+
+.reset:hover{
+  background-color: #2f4058;
+  transition: 0.2s;
+}
+
+
+/* FOOTER */
+footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }

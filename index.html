@@ -9,22 +9,29 @@
   <title>Rock Paper Scissors</title>
 </head>
 <body>
-  <div class="flex">
+  <header class="header">
     <h1>Rock, Paper and Scissors</h1>
+  </header>
+  <main class="main">
+    <div class="scoreboard">
+      <h3 class="result">Choose your weapon</h3>
+      <h4 class="resultInfo">First to score 5 points wins!</h4>
+      <div class="points">
+        <div class="scoreBox">
+          <div class="sign" id="playerSign">?</div>
+          <div class="score" id="playerScore">Player: 0</div>
+        </div>
+        <div class="scoreBox">
+          <div class="sign" id="computerSign">?</div>
+          <div class="score" id="computerScore">Computer: 0</div>
+        </div>
+      </div>
+    </div>
     <div class="playerPick"> 
-      <button type="button" class="0">Rock</button>
-      <button type="button" class="1">Paper</button>
-      <button type="button" class="2">Scissors</button>
+      <button type="button" class="0">✊</button>
+      <button type="button" class="1">✋</button>
+      <button type="button" class="2">✌</button>
     </div>
-    
-    <div class="result"></div>
-
-    <div class="points">
-      <div class="playerScore">player: </div>
-      <div class="computerScore">computer: </div>
-    </div>
-
-    <div class="footer"></div>
-  </div>
+  </main>
 </body>
 </html>
